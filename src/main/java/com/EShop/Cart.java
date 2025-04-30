@@ -7,26 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<Product> productList;
-    Discount discount;
-    TenPercent tenPercent = new TenPercent();
 
-    public Cart(List<Product> productList, Discount discount) {
-        this.productList = new ArrayList<>(productList);
-        this.discount = discount;
-    }
+    private List <Product> productList;
 
-    public Cart() {
-        this.productList = new ArrayList<>();
-        this.discount = null;
-    }
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
+    public Cart(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public List<Product> getProductList(List<Product> productList) {
+        return productList;
     }
 
     public List<Product> addToCart(Product product){
@@ -34,15 +23,15 @@ public class Cart {
        return productList;
     }
 
-    public List<Product> removeFromCart(Product product){
+    public List<Product> removeFromCart( Product product){
         productList.remove(product);
         return productList;
 
     }
 
     public void showCart() {
-        System.out.println("Cart:");
-        for (Product product: getProductList() ){
+        System.out.println("You have following products in your cart:");
+        for (Product product: getProductList(productList) ){
             System.out.println(product);
         }
     }
@@ -55,15 +44,9 @@ public class Cart {
         return total;
     }
 
-    public double calculateTotalAfterDiscount() {
-        return tenPercent.applyDiscount(calculateTotalBeforeDiscount());
+    public double calculateTotalAfterDiscount (Discount discount) {
+        return discount.applyDiscount(calculateTotalBeforeDiscount());
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "discount=" + discount +
-                ", productList=" + productList +
-                '}';
-    }
+
 }

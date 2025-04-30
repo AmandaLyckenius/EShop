@@ -1,24 +1,34 @@
 package com.EShop;
 
 public class Product {
-    String name;
+    String article;
+    String brand;
     String category;
     double price;
     int quantity;
 
-    public Product(String name, String category, double price, int quantity) {
-        this.name = name;
+    public Product(String article, String brand, String category, double price, int quantity) {
+        this.article = article;
+        this.brand = brand;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
     }
 
-    public String getName() {
-        return name;
+    public String getArticle() {
+        return article;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setArticle(String article) {
+        this.article = article;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getCategory() {
@@ -51,11 +61,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
+        return
+                "\n" +
+                "Article:" + article + "\n" +
+                "Brand:" + brand + "\n" +
+                "Price:" + price + "\n" +
+                "Quantity:" + quantity;
     }
 }

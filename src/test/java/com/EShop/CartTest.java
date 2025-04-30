@@ -1,5 +1,8 @@
 package com.EShop;
 
+import com.EShop.discount.Discount;
+import com.EShop.discount.TenPercent;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,47 +13,52 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CartTest {
     private List<Product> productList;
+    Cart cart;
+    Product laptop;
+    Product tv;
+
+    @BeforeEach
+    void setUp(){
+        productList = new ArrayList<>();
+        cart = new Cart(productList);
+        laptop = new Product("Laptop", "Macbook", "Electronic", 10000.00, 1);
+        tv = new Product("TV","Samsung", "Electronic", 2000.00, 1);
+    }
 
     @Test
     @DisplayName("Test adding a product to the Cart")
     void addToCart() {
-        Cart cart = new Cart();
-        Product laptop = new Product("Macbook", "Electronic", 10000.00, 1);
-        Product tv = new Product("Samsung", "Electronic", 2000.00, 1);
         cart.addToCart(laptop);
-        cart.addToCart(tv);
-        assertTrue(cart.getProductList().contains(laptop));
+        cart.addToCart( tv);
+        assertTrue(cart.getProductList(productList).contains(laptop));
     }
 
     @Test
     @DisplayName("Test removing a product from the Cart")
     void removeFromCart() {
-        Cart cart = new Cart();
-        Product laptop = new Product("Macbook", "Electronic", 10000.00, 1);
-        Product tv = new Product("Samsung", "Electronic", 2000.00, 1);
         cart.addToCart(laptop);
-        cart.addToCart(tv);
+        cart.addToCart( tv);
         cart.removeFromCart(laptop);
-        assertFalse(cart.getProductList().contains(laptop));
+        assertFalse(cart.getProductList(productList).contains(laptop));
 
     }
 
     @Test
     @DisplayName("Test showing  products in the Cart")
     void showCart() {
-        Cart cart = new Cart();
-        Product laptop = new Product("Macbook", "Electronic", 10000.00, 1);
-        Product tv = new Product("Samsung", "Electronic", 2000.00, 3);
         cart.addToCart(laptop);
         cart.addToCart(laptop);
         cart.addToCart(tv);
+
+        assertEquals(laptop, productList.get(0));
+        assertEquals(laptop, productList.get(1));
+        assertEquals(tv, productList.get(2));
+
     }
 
     @Test
     @DisplayName("Test calculating Cart's total amount before discount")
     void calculateTotalBeforeDiscount() {
-        Cart cart = new Cart();
-        Product laptop = new Product("Macbook", "Electronic", 10000.00, 1);
         cart.addToCart(laptop);
         cart.addToCart(laptop);
         assertEquals(20000.00, cart.calculateTotalBeforeDiscount());
@@ -59,10 +67,9 @@ class CartTest {
     @Test
     @DisplayName("Test calculating Cart's total amount after discount")
     void calculateTotalAfterDiscount() {
-        Cart cart = new Cart();
-        Product laptop = new Product("Macbook", "Electronic", 10000.00, 1);
+        Discount discount10 = new TenPercent();
         cart.addToCart(laptop);
         cart.addToCart(laptop);
-        assertEquals(18000.00, cart.calculateTotalAfterDiscount());
+        assertEquals(18000.00, cart.calculateTotalAfterDiscount(discount10));
     }
 }
