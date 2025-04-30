@@ -49,7 +49,13 @@ public class Product {
         return (getPrice()* getQuantity());
     }
 
-    public void addToCart() {
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }

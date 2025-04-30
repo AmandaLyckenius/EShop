@@ -13,7 +13,12 @@ public class Main {
 
         Discount discount = new TenPercent();
 
-        Cart cart = new Cart(Arrays.asList(laptop, tv), discount);
+        Cart cart = new Cart();
+
+        cart.addToCart(laptop);
+        cart.addToCart(tv);
+
+        cart.showCart();
 
     }
 }
