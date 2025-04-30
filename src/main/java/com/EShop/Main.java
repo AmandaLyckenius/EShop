@@ -19,6 +19,8 @@ public class Main {
         cart.addToCart(tv);
 
         cart.showCart();
+        System.out.println(cart.calculateTotalBeforeDiscount());
+        System.out.println(cart.calculateTotalAfterDiscount());
 
     }
 }
