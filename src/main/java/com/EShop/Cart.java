@@ -18,9 +18,15 @@ public class Cart {
         return productList;
     }
 
-    public List<Product> addToCart(Product product){
-       productList.add(product);
-       return productList;
+    public List<Product> addToCart(Product product) {
+        for (Product p : productList) {
+            if (p.equals(product)) {
+                p.setQuantity(p.getQuantity() + product.getQuantity());
+                return productList;
+            }
+        }
+        productList.add(product);
+        return productList;
     }
 
     public List<Product> removeFromCart( Product product){
