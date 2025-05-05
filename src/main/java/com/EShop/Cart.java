@@ -30,16 +30,39 @@ public class Cart {
     }
 
     public List<Product> removeFromCart( Product product){
+        for (Product p : productList) {
+            if (p.equals(product)) {
+
+                if (p.getQuantity() >= 2) {
+                    p.setQuantity(p.getQuantity() - 1);
+                    return productList;
+                }
+
+            }
+        }
         productList.remove(product);
         return productList;
 
     }
 
-    public void showCart() {
-        System.out.println("You have following products in your cart:");
-        for (Product product: getProductList(productList) ){
-            System.out.println(product);
+    public void showCart(Discount discount) {
+        if (productList.isEmpty()) {
+            System.out.println("You don't have any articles in your cart");
+        } else {
+            System.out.println("You have following products in your cart:");
+            for (Product product: getProductList(productList) ){
+                System.out.println(product);
+            }
+
+            System.out.println("-----------------------------");
+            System.out.println("Total amount before discount: " + calculateTotalBeforeDiscount());
+            System.out.println("Discount amount: " + discount.discountAmount(calculateTotalBeforeDiscount()));
+            System.out.println("Total amount after discount: " + discount.applyDiscount(calculateTotalBeforeDiscount()));
+
+
         }
+
+
     }
 
     public double calculateTotalBeforeDiscount() {
@@ -50,9 +73,10 @@ public class Cart {
         return total;
     }
 
-    public double calculateTotalAfterDiscount (Discount discount) {
-        return discount.applyDiscount(calculateTotalBeforeDiscount());
-    }
+
+
+
+
 
 
 }
