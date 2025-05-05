@@ -19,8 +19,12 @@ public class Main {
 
         cart.addToCart( laptop);
         cart.addToCart( tv);
+        cart.addToCart( laptop);
+
 
         cart.showCart();
+
+        System.out.println("----------------------------------------");
         System.out.println("Total amount before discount: " + cart.calculateTotalBeforeDiscount() + "kr");
         System.out.println("Total amount after discount: " + cart.calculateTotalAfterDiscount(discount10) + "kr");
 

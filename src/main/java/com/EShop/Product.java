@@ -1,5 +1,7 @@
 package com.EShop;
 
+import java.util.Objects;
+
 public class Product {
     String article;
     String brand;
@@ -67,5 +69,21 @@ public class Product {
                 "Brand:" + brand + "\n" +
                 "Price:" + price + "\n" +
                 "Quantity:" + quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return  article.equals(product.article) &&
+                brand.equals(product.brand) &&
+                category.equals(product.category) &&
+                price == product.price;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(article, brand, category, price);
     }
 }
