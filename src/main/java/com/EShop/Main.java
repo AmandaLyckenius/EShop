@@ -2,6 +2,8 @@ package com.EShop;
 
 import com.EShop.discount.Discount;
 import com.EShop.discount.TenPercent;
+import com.EShop.discount.TwentyPercent;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Main {
         Product tv = new Product("TV", "Samsung","Electronic", 2000.00, 1);
 
         Discount discount10 = new TenPercent();
+        Discount discount20 = new TwentyPercent();
         List<Product> productList = new ArrayList<>();
 
         Cart cart = new Cart(productList);
@@ -20,13 +23,16 @@ public class Main {
         cart.addToCart( laptop);
         cart.addToCart( tv);
         cart.addToCart( laptop);
+        cart.removeFromCart(tv);
+        cart.removeFromCart(laptop);
+        cart.removeFromCart(laptop);
 
 
-        cart.showCart();
+        cart.showCart(discount20);
 
-        System.out.println("----------------------------------------");
-        System.out.println("Total amount before discount: " + cart.calculateTotalBeforeDiscount() + "kr");
-        System.out.println("Total amount after discount: " + cart.calculateTotalAfterDiscount(discount10) + "kr");
+
+
+
 
     }
 }
