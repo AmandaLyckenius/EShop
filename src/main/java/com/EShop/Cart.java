@@ -26,6 +26,7 @@ public class Cart {
             }
         }
         productList.add(product);
+        System.out.println(product.article + " successfully added to the cart" + "\n");
         return productList;
     }
 
@@ -41,6 +42,7 @@ public class Cart {
             }
         }
         productList.remove(product);
+        System.out.println(product.article + " successfully removed from the cart" + "\n");
         return productList;
 
     }

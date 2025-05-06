@@ -23,9 +23,11 @@ public class Main {
         cart.addToCart( laptop);
         cart.addToCart( tv);
         cart.addToCart( laptop);
+        cart.removeFromCart(laptop);
+        cart.removeFromCart(laptop);
         cart.removeFromCart(tv);
-        cart.removeFromCart(laptop);
-        cart.removeFromCart(laptop);
+
+
 
 
         cart.showCart(discount20);
