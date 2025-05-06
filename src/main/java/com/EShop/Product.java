@@ -1,21 +1,32 @@
 package com.EShop;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Product {
     String article;
-    String brand;
+    String description;
     String category;
     double price;
     int quantity;
 
-    public Product(String article, String brand, String category, double price, int quantity) {
+    public Product(String article, String description, String category, double price, int quantity) {
         this.article = article;
-        this.brand = brand;
+        this.description = description;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
     }
+
+    public Product() {
+        this.article = article;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+
 
     public String getArticle() {
         return article;
@@ -25,12 +36,12 @@ public class Product {
         this.article = article;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCategory() {
@@ -61,14 +72,23 @@ public class Product {
         return (getPrice()* getQuantity());
     }
 
+    public void showProducts(List <Product> allProducts) {
+        System.out.println("Welcome to STI bakery");
+        System.out.println("View our products below");
+
+        for (Product product : allProducts) {
+            System.out.println(product);
+        }
+
+    }
+
     @Override
     public String toString() {
         return
                 "\n" +
-                "Article:" + article + "\n" +
-                "Brand:" + brand + "\n" +
-                "Price:" + price + "\n" +
-                "Quantity:" + quantity;
+                article + "\n" + "Description: " + description + "\n" +
+                "Price: " + price + " kr" + "\n" +
+                "Quantity: " + quantity;
     }
 
     @Override
@@ -77,13 +97,13 @@ public class Product {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return  article.equals(product.article) &&
-                brand.equals(product.brand) &&
+                description.equals(product.description) &&
                 category.equals(product.category) &&
                 price == product.price;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(article, brand, category, price);
+        return Objects.hash(article, description, category, price);
     }
 }
