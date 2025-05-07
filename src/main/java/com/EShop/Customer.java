@@ -3,6 +3,7 @@ package com.EShop;
 public class Customer {
     private String name;
     private double saldo;
+
     private Cart cart;
 
     public Customer(String name, double saldo, Cart cart) {
