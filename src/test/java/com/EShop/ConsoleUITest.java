@@ -20,7 +20,7 @@ class ConsoleUITest {
         ConsoleUI consoleUI = new ConsoleUI();
         List<Product> allProducts = consoleUI.getAllProducts();
         assertEquals(8, allProducts.size());
-        assertEquals("Chocolate cookie", allProducts.get(0).getArticle());
+        assertEquals("Chocolate Chip Cookie", allProducts.get(0).getArticle());
 
     }
 
