@@ -8,11 +8,21 @@ public class Customer {
         this.saldo = saldo;
     }
 
-    public void addSaldo(double saldo) {}
-
-    public boolean deductSaldo(double amount){
-        return true;
+    public void addSaldo(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be positive.");
+        }
+        saldo += amount;
     }
+
+    public boolean deductSaldo(double amount) {
+        if (amount > 0 && amount <= saldo) {
+            saldo -= amount;
+            return true;
+        }
+        return false;
+    }
+
 
     public double getSaldo() {
         return saldo;
