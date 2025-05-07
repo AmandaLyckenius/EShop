@@ -70,6 +70,6 @@ class CartTest {
         Discount discount10 = new TenPercent();
         cart.addToCart(laptop);
         cart.addToCart(laptop);
-        assertEquals(18000.00, cart.calculateTotalAfterDiscount(discount10));
+        assertEquals(18000.00, discount10.applyDiscount(cart.calculateTotalBeforeDiscount()));
     }
 }
