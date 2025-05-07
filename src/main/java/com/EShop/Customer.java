@@ -1,31 +1,29 @@
 package com.EShop;
 
 public class Customer {
-    private double saldo;
+    private double balance;
 
-
-    public Customer(double saldo) {
-        this.saldo = saldo;
+    public Customer(double balance) {
+        this.balance = balance;
     }
 
-    public void addSaldo(double amount) {
+    public void addBalance(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount must be positive.");
         }
-        saldo += amount;
+        balance += amount;
     }
 
-    public boolean deductSaldo(double amount) {
-        if (amount > 0 && amount <= saldo) {
-            saldo -= amount;
+    public boolean deductBalance(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
             return true;
         }
         return false;
     }
 
-
-    public double getSaldo() {
-        return saldo;
+    public double getBalance() {
+        return balance;
     }
 
 }

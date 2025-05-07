@@ -1,57 +1,58 @@
 package com.EShop;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 
+    Customer customer;
+
+    @BeforeEach
+    void setUp() {
+        customer = new Customer(100);
+    }
+
     @Test
     void testAddSaldoIncreasesValue() {
-        Customer customer = new Customer(0.0);
-        customer.addSaldo(100.0);
-        assertEquals(100.0, customer.getSaldo());
+        customer.addBalance(100.0);
+        assertEquals(200.0, customer.getBalance());
     }
 
     @Test
     void testAddSaldoFailsWithNegativeAmount() {
-        Customer customer = new Customer(50.0);
-        assertThrows(IllegalArgumentException.class, () -> customer.addSaldo(-20.0));
+        assertThrows(IllegalArgumentException.class, () -> customer.addBalance(-20.0));
     }
 
 
     @Test
     void testDeductsWhenEnoughSaldo() {
-        Customer customer = new Customer(100.0);
-        assertTrue(customer.deductSaldo(30.0));
-        assertEquals(70.0, customer.getSaldo());
+        assertTrue(customer.deductBalance(30.0));
+        assertEquals(70.0, customer.getBalance());
     }
 
     @Test
     void testDoesNotDeductIfNotEnough() {
-        Customer customer = new Customer(50.0);
-        assertFalse(customer.deductSaldo(80.0));
-        assertEquals(50.0, customer.getSaldo());
+        assertFalse(customer.deductBalance(180.0));
+        assertEquals(100.0, customer.getBalance());
     }
 
     @Test
     void testDeductFailsIfNegativeAmount() {
-        Customer customer = new Customer(50.0);
-        assertFalse(customer.deductSaldo(-10.0));
-        assertEquals(50.0, customer.getSaldo());
+        assertFalse(customer.deductBalance(-10.0));
+        assertEquals(100.0, customer.getBalance());
     }
 
     @Test
     void testDeductsExactAmountToZero() {
-        Customer customer = new Customer(25.0);
-        assertTrue(customer.deductSaldo(25.0));
-        assertEquals(0.0, customer.getSaldo());
+        assertTrue(customer.deductBalance(100.0));
+        assertEquals(0.0, customer.getBalance());
     }
 
     @Test
     void testNoDeductionIfAmountIsZero() {
-        Customer customer = new Customer(40.0);
-        assertFalse(customer.deductSaldo(0.0));
-        assertEquals(40.0, customer.getSaldo());
+        assertFalse(customer.deductBalance(0.0));
+        assertEquals(100.0, customer.getBalance());
     }
 }
 
