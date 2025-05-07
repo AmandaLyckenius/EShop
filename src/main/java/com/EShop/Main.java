@@ -21,9 +21,11 @@ public class Main {
         Cart cart = new Cart(productList);
         ConsoleUI consoleUI = new ConsoleUI();
 
-        products.showProducts(allProducts);
+        consoleUI.printWelcomeMenu();
 
-        // cart.showCart(discount20);
+
+
+
     }
 
 

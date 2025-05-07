@@ -21,8 +21,8 @@ class CartTest {
     void setUp(){
         productList = new ArrayList<>();
         cart = new Cart(productList);
-        laptop = new Product("Laptop", "Macbook", "Electronic", 10000.00, 1);
-        tv = new Product("TV","Samsung", "Electronic", 2000.00, 1);
+        laptop = new Product(1,"Laptop", "Macbook", "Electronic", 10000.00, 1);
+        tv = new Product(2,"TV","Samsung", "Electronic", 2000.00, 1);
     }
 
     @Test

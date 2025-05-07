@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class Product {
+    int articleNumber;
     String article;
     String description;
     String category;
     double price;
     int quantity;
 
-    public Product(String article, String description, String category, double price, int quantity) {
+    public Product(int articleNumber, String article, String description, String category, double price, int quantity) {
+        this.articleNumber=articleNumber;
         this.article = article;
         this.description = description;
         this.category = category;
@@ -19,6 +21,7 @@ public class Product {
     }
 
     public Product() {
+        this.articleNumber = articleNumber;
         this.article = article;
         this.description = description;
         this.category = category;
@@ -26,7 +29,13 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public int getArticleNumber() {
+        return articleNumber;
+    }
 
+    public void setArticleNumber(int articleNumber) {
+        this.articleNumber = articleNumber;
+    }
 
     public String getArticle() {
         return article;
@@ -73,7 +82,6 @@ public class Product {
     }
 
     public void showProducts(List <Product> allProducts) {
-        System.out.println("Welcome to STI bakery");
         System.out.println("View our products below");
 
         for (Product product : allProducts) {
@@ -86,7 +94,7 @@ public class Product {
     public String toString() {
         return
                 "\n" +
-                article + "\n" + "Description: " + description + "\n" +
+                article + "\n" + "Article number: " + articleNumber + "\n" + "Description: " + description + "\n" +
                 "Price: " + price + " kr" + "\n" +
                 "Quantity: " + quantity;
     }
