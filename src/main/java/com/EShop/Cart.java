@@ -1,76 +1,70 @@
 package com.EShop;
-
 import com.EShop.discount.Discount;
-import com.EShop.discount.TenPercent;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
 
-    private List <Product> productList;
+    private List <CartItem> cartItemList;
 
-    public Cart(List<Product> productList) {
-        this.productList = productList;
+    public Cart(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
     }
 
-    public List<Product> getProductList(List<Product> productList) {
-        return productList;
+    public List<CartItem> getCartItemList() {
+        return cartItemList;
     }
 
-    public List<Product> addToCart(Product product) {
-        for (Product p : productList) {
-            if (p.equals(product)) {
-                p.setQuantity(p.getQuantity() + product.getQuantity());
-                return productList;
+    public List<CartItem> addToCart(CartItem cartItem) {
+        for (CartItem c : cartItemList) {
+            if (c.equals(cartItem)) {
+                c.setQuantity(c.getQuantity() + cartItem.getQuantity());
+                return cartItemList;
             }
         }
-        productList.add(product);
-        System.out.println(product.article + " successfully added to the cart" + "\n");
-        return productList;
+        cartItemList.add(cartItem);
+        System.out.println(cartItem.getProduct().article + " successfully added to the cart" + "\n");
+        return cartItemList;
     }
 
-    public List<Product> removeFromCart( Product product){
-        for (Product p : productList) {
-            if (p.equals(product)) {
+    public List<CartItem> removeFromCart(CartItem cartItem){
+        for (CartItem c : cartItemList) {
+            if (c.equals(cartItem)) {
 
-                if (p.getQuantity() >= 2) {
-                    p.setQuantity(p.getQuantity() - 1);
-                    return productList;
+                if (c.getQuantity() >= 2) {
+                    c.setQuantity(c.getQuantity() - 1);
+                    return cartItemList;
                 }
 
             }
         }
-        productList.remove(product);
-        System.out.println(product.article + " successfully removed from the cart" + "\n");
-        return productList;
+        cartItemList.remove(cartItem);
+        System.out.println(cartItem.getProduct().article + " successfully removed from the cart" + "\n");
+        return cartItemList;
 
     }
 
     public void showCart(Discount discount) {
-        if (productList.isEmpty()) {
+        if (cartItemList.isEmpty()) {
             System.out.println("You don't have any articles in your cart");
         } else {
             System.out.println("You have following products in your cart:");
-            for (Product product: getProductList(productList) ){
-                System.out.println(product);
+            for (CartItem cartItem: cartItemList ){
+                System.out.println(cartItem);
             }
 
             System.out.println("-----------------------------");
-            System.out.println("Total amount before discount: " + calculateTotalBeforeDiscount());
-            System.out.println("Discount amount: " + discount.discountAmount(calculateTotalBeforeDiscount()));
-            System.out.println("Total amount after discount: " + discount.applyDiscount(calculateTotalBeforeDiscount()));
 
-
+            double totalBefore = calculateTotalBeforeDiscount();
+            System.out.println("Total amount before discount: " + totalBefore);
+            System.out.println("Discount amount: " + discount.discountAmount(totalBefore));
+            System.out.println("Total amount after discount: " + discount.applyDiscount(totalBefore));
         }
-
-
     }
 
     public double calculateTotalBeforeDiscount() {
         double total = 0;
-        for (Product product : productList) {
-            total += product.calculateTotal();
+        for (CartItem cartItem : cartItemList) {
+            total += cartItem.calculateTotal();
         }
         return total;
     }
