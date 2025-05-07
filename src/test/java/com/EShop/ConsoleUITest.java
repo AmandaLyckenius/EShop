@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.EShop.Main.getAllProducts;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConsoleUITest {
@@ -18,7 +19,7 @@ class ConsoleUITest {
     @Test
     void getAllProductsTest(){
         ConsoleUI consoleUI = new ConsoleUI();
-        List<Product> allProducts = consoleUI.getAllProducts();
+        List<Product> allProducts = getAllProducts();
         assertEquals(8, allProducts.size());
         assertEquals("Chocolate Chip Cookie", allProducts.get(0).getArticle());
 
