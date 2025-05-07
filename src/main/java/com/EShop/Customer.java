@@ -1,39 +1,21 @@
 package com.EShop;
 
 public class Customer {
-    private String name;
     private double saldo;
 
-    private Cart cart;
 
-    public Customer(String name, double saldo, Cart cart) {
-        this.name = name;
+    public Customer(double saldo) {
         this.saldo = saldo;
-        this.cart = cart;
     }
 
-    public String getName() {
-        return name;
-    }
+    public void addSaldo(double saldo) {}
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean deductSaldo(double amount){
+        return true;
     }
 
     public double getSaldo() {
         return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 
 }
