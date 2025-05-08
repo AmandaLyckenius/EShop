@@ -16,9 +16,9 @@ public class ConsoleUI {
         return "Welcome to STI Bakery";
     }
 
-    public void printWelcomeMenu(Product products, List<Product> allProducts) {
+    public void printWelcomeMenu(List<Product> allProducts) {
         System.out.println(getWelcomeMessage());
-        products.showProducts(allProducts);
+        showProducts(allProducts);
         System.out.println(options());
         getUserInput();
     }
@@ -51,6 +51,16 @@ public class ConsoleUI {
                 "3) View cart summary \n" +
                 "4) Check saldo \n" +
                 "5) Checkout";
+    }
+
+
+    public void showProducts(List <Product> allProducts) {
+        System.out.println("View our products below");
+
+        for (Product product : allProducts) {
+            System.out.println(product);
+        }
+
     }
 
 

@@ -66,17 +66,6 @@ public class Product {
         this.price = price;
     }
 
-
-
-    public void showProducts(List <Product> allProducts) {
-        System.out.println("View our products below");
-
-        for (Product product : allProducts) {
-            System.out.println(product);
-        }
-
-    }
-
     @Override
     public String toString() {
         return
