@@ -14,12 +14,13 @@ public class ProductServiceTest {
 
     @BeforeEach
     public void setUp() {
-        productService = new ProductService();
         productList= new ArrayList<>(List.of(
                 new Product(1,"Laptop", "Macbook", "Electronic", 10000.00),
                 new Product(2,"TV","Samsung", "Electronic", 2000.00)
 
         ));
+
+        productService = new ProductService(productList);
     }
 
     @Test
