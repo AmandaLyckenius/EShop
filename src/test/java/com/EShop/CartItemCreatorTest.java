@@ -31,10 +31,32 @@ public class CartItemCreatorTest {
         int fakeQuantity = 2;
 
 
-        CartItem result = cartItemCreator.createCartItem(productService.findByArticleNumber(fakeInput), fakeQuantity);
+        CartItem result = cartItemCreator.createCartItem(fakeInput, fakeQuantity);
 
         assertNotNull(result);
         assertEquals(productList.get(0).getArticleNumber(), result.getProduct().getArticleNumber());
         assertEquals(fakeQuantity, result.getQuantity());
+    }
+
+    @Test
+    public void createCartItem_returnsNull_whenArticleNumberDoesNotExist() {
+        int fakeInput = 999;
+        int fakeQuantity = 2;
+
+
+        CartItem result = cartItemCreator.createCartItem(fakeInput, fakeQuantity);
+
+        assertNull(result);
+    }
+
+    @Test
+    public void createCartItem_returnsNull_whenQuantityIsZeroOrNegative() {
+        int fakeInput = 1;
+        int fakeQuantity = -1;
+
+
+        CartItem result = cartItemCreator.createCartItem(fakeInput, fakeQuantity);
+
+        assertNull(result);
     }
 }
