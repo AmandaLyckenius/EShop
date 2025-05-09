@@ -1,7 +1,8 @@
-package com.EShop;
+package com.EShop.cart;
 
 import com.EShop.discount.Discount;
 import com.EShop.discount.TenPercent;
+import com.EShop.product.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

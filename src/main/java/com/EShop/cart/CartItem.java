@@ -1,4 +1,6 @@
-package com.EShop;
+package com.EShop.cart;
+
+import com.EShop.product.Product;
 
 import java.util.Objects;
 

@@ -1,9 +1,11 @@
 package com.EShop;
+import com.EShop.cart.Cart;
+import com.EShop.cart.CartItem;
+import com.EShop.cart.CartItemCreator;
 import com.EShop.discount.Discount;
-import com.EShop.discount.TenPercent;
-import com.EShop.discount.TwentyPercent;
+import com.EShop.product.Product;
+import com.EShop.product.ProductService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

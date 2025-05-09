@@ -1,5 +1,7 @@
-package com.EShop;
+package com.EShop.cart;
 
+import com.EShop.product.Product;
+import com.EShop.product.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

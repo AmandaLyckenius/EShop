@@ -1,4 +1,9 @@
 package com.EShop;
+import com.EShop.cart.Cart;
+import com.EShop.cart.CartItem;
+import com.EShop.cart.CartItemCreator;
+import com.EShop.product.Product;
+import com.EShop.product.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

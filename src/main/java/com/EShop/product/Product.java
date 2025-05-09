@@ -1,6 +1,5 @@
-package com.EShop;
+package com.EShop.product;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Product {

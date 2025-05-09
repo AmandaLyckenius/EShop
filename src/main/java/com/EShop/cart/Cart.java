@@ -1,5 +1,5 @@
-package com.EShop;
-import com.EShop.discount.Discount;
+package com.EShop.cart;
+
 import java.util.List;
 
 public class Cart {
@@ -22,7 +22,7 @@ public class Cart {
             }
         }
         cartItemList.add(cartItem);
-        System.out.println(cartItem.getProduct().article + " successfully added to the cart" + "\n");
+        System.out.println(cartItem.getProduct().getArticle() + " successfully added to the cart" + "\n");
         return cartItemList;
     }
 
@@ -38,7 +38,7 @@ public class Cart {
             }
         }
         cartItemList.remove(cartItem);
-        System.out.println(cartItem.getProduct().article + " successfully removed from the cart" + "\n");
+        System.out.println(cartItem.getProduct().getArticle() + " successfully removed from the cart" + "\n");
         return cartItemList;
 
     }
