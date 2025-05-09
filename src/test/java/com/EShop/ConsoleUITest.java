@@ -80,7 +80,25 @@ class ConsoleUITest {
 
 
     @Test
-    void processInput() {
-
+    void processInputCase1() {
+        int fakeInput = 1;
+        boolean result= consoleUI.processInput(fakeInput);
+        assertTrue(result);
     }
+
+    @Test
+    void processInputCase2() {
+        int fakeInput = 2;
+        boolean result= consoleUI.processInput(fakeInput);
+        assertTrue(result);
+    }
+
+   @Test
+    void processInputCase3() {
+        int fakeInput = 3;
+        boolean result= consoleUI.processInput(fakeInput);
+        assertTrue(result);
+    }
+
+
 }

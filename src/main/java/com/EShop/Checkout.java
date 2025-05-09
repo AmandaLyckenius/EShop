@@ -1,5 +1,7 @@
 package com.EShop;
 
+import com.EShop.cart.Cart;
+
 public class Checkout {
 Customer customer;
 Cart cart;

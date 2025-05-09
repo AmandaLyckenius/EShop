@@ -35,7 +35,7 @@ public class ConsoleUI {
 
     private void getUserInput() {
         while (running) {
-            String userInput = createScannerString();
+            int userInput = createScannerInt();
             processInput(userInput);
         }
     }
@@ -48,7 +48,7 @@ public class ConsoleUI {
         return scanner.next();
     }
 
-    public boolean processInput(String input) {
+    public boolean processInput(int input) {
         return false;
     }
 
