@@ -10,7 +10,16 @@ import java.util.Scanner;
 public class ConsoleUI {
     private boolean running = true;
     private final Scanner scanner = new Scanner(System.in);
+    Cart cart;
+    CartItemCreator cartItemCreator;
+    ProductService productService;
 
+    public ConsoleUI(boolean running, Cart cart, CartItemCreator cartItemCreator, ProductService productService) {
+        this.running = running;
+        this.cart = cart;
+        this.cartItemCreator = cartItemCreator;
+        this.productService = productService;
+    }
 
     public String getWelcomeMessage() {
         return "Welcome to STI Bakery";
@@ -61,6 +70,24 @@ public class ConsoleUI {
             System.out.println(product);
         }
 
+    }
+
+    public void showCart(Discount discount) {
+        if (cart.getCartItemList().isEmpty()) {
+            System.out.println("You don't have any articles in your cart");
+        } else {
+            System.out.println("You have following products in your cart:");
+            for (CartItem cartItem: cart.getCartItemList() ){
+                System.out.println(cartItem);
+            }
+
+            System.out.println("-----------------------------");
+
+            double totalBefore = cart.calculateTotalBeforeDiscount();
+            System.out.println("Total amount before discount: " + totalBefore);
+            System.out.println("Discount amount: " + discount.discountAmount(totalBefore));
+            System.out.println("Total amount after discount: " + discount.applyDiscount(totalBefore));
+        }
     }
 
 

@@ -43,23 +43,6 @@ public class Cart {
 
     }
 
-    public void showCart(Discount discount) {
-        if (cartItemList.isEmpty()) {
-            System.out.println("You don't have any articles in your cart");
-        } else {
-            System.out.println("You have following products in your cart:");
-            for (CartItem cartItem: cartItemList ){
-                System.out.println(cartItem);
-            }
-
-            System.out.println("-----------------------------");
-
-            double totalBefore = calculateTotalBeforeDiscount();
-            System.out.println("Total amount before discount: " + totalBefore);
-            System.out.println("Discount amount: " + discount.discountAmount(totalBefore));
-            System.out.println("Total amount after discount: " + discount.applyDiscount(totalBefore));
-        }
-    }
 
     public double calculateTotalBeforeDiscount() {
         double total = 0;
