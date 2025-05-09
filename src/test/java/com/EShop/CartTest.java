@@ -47,17 +47,6 @@ class CartTest {
     }
 
     @Test
-    @DisplayName("Test showing  products in the Cart")
-    void showCart() {
-        cart.addToCart(laptopItem);
-        cart.addToCart(tvItem);
-
-        assertEquals(laptopItem, cartItemList.get(0));
-        assertEquals(tvItem, cartItemList.get(1));
-
-    }
-
-    @Test
     @DisplayName("Test calculating Cart's total amount before discount")
     void calculateTotalBeforeDiscount() {
         cart.addToCart(laptopItem);

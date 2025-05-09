@@ -16,7 +16,7 @@ public class Main {
         Discount discount20 = new TwentyPercent();
         List<CartItem> cartItemList = new ArrayList<>();
         Cart cart = new Cart(cartItemList);
-        ConsoleUI consoleUI = new ConsoleUI();
+
 
 
     }

@@ -14,8 +14,7 @@ public class ConsoleUI {
     CartItemCreator cartItemCreator;
     ProductService productService;
 
-    public ConsoleUI(boolean running, Cart cart, CartItemCreator cartItemCreator, ProductService productService) {
-        this.running = running;
+    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService) {
         this.cart = cart;
         this.cartItemCreator = cartItemCreator;
         this.productService = productService;
