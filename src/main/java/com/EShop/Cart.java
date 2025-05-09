@@ -60,10 +60,7 @@ public class Cart {
             System.out.println("Total amount before discount: " + calculateTotalBeforeDiscount());
             System.out.println("Discount amount: " + discount.discountAmount(calculateTotalBeforeDiscount()));
             System.out.println("Total amount after discount: " + discount.applyDiscount(calculateTotalBeforeDiscount()));
-
-
         }
-
 
     }
 
