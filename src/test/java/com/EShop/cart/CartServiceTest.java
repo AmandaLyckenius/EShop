@@ -47,12 +47,41 @@ public class CartServiceTest {
         int fakeArticleNumber = 1;
         int fakeQuantity = 2;
 
-        cartService.addProductToCart_byArticleNumberAndQuantity(1,2);
+        cartService.addProductToCart_byArticleNumberAndQuantity(fakeArticleNumber,fakeQuantity);
 
         CartItem itemInCart = cart.getCartItemList().get(0);
 
         assertEquals(laptop.getArticleNumber(), itemInCart.getProduct().getArticleNumber());
         assertEquals(2, itemInCart.getQuantity());
+
+    }
+
+    @Test
+    void removeProductFromCart_decreaseQuantity_ifQuantityMoreThan1() {
+        int fakeArticleNumber = 1;
+        int fakeQuantity = 2;
+
+        cartService.addProductToCart_byArticleNumberAndQuantity(fakeArticleNumber,fakeQuantity);
+
+        CartItem itemFromCart = cart.getCartItemList().get(0);
+        cartService.removeProductFromCart_byArticleNumber(fakeArticleNumber);
+
+        assertEquals(1, itemFromCart.getQuantity());
+        assertTrue(cart.getCartItemList().contains(itemFromCart));
+    }
+
+    @Test
+    void removeProductFromCart_removesCompletely_whenQuantityIsOne() {
+        int fakeArticleNumber = 1;
+        int fakeQuantity = 1;
+
+        cartService.addProductToCart_byArticleNumberAndQuantity(fakeArticleNumber,fakeQuantity);
+
+        CartItem itemFromCart = cart.getCartItemList().get(0);
+        cartService.removeProductFromCart_byArticleNumber(fakeArticleNumber);
+
+        assertFalse(cart.getCartItemList().contains(itemFromCart));
+        assertEquals(0, itemFromCart.getQuantity());
 
     }
 }
