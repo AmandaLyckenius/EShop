@@ -2,6 +2,7 @@ package com.EShop;
 import com.EShop.cart.Cart;
 import com.EShop.cart.CartItem;
 import com.EShop.cart.CartItemCreator;
+import com.EShop.cart.CartService;
 import com.EShop.discount.Discount;
 import com.EShop.product.Product;
 import com.EShop.product.ProductService;
@@ -15,6 +16,7 @@ public class ConsoleUI {
     Cart cart;
     CartItemCreator cartItemCreator;
     ProductService productService;
+    CartService cartService;
 
     public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService) {
         this.cart = cart;
@@ -88,6 +90,27 @@ public class ConsoleUI {
             System.out.println("Total amount before discount: " + totalBefore);
             System.out.println("Discount amount: " + discount.discountAmount(totalBefore));
             System.out.println("Total amount after discount: " + discount.applyDiscount(totalBefore));
+        }
+    }
+
+    public void handleAddToCart() {
+        boolean addedSuccessfully = false;
+
+        while (!addedSuccessfully) {
+
+            System.out.println("Please enter article number for the product you would like to add: ");
+            int articleNumber = createScannerInt();
+            System.out.println("Please enter quantity:");
+            int quantity = createScannerInt();
+
+            boolean result = cartService.addProductToCart_byArticleNumberAndQuantity(articleNumber, quantity);
+
+            if (result == true){
+                System.out.println("Product successfully added to cart!");
+                addedSuccessfully = true;
+            } else {
+                System.out.println("Product could not be added to cart. Please try again!");
+            }
         }
     }
 
