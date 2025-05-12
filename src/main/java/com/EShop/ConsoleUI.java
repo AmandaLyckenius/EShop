@@ -123,5 +123,24 @@ public class ConsoleUI {
         }
     }
 
+    public void handleRemoveFromCart() {
+        boolean removedSuccessfully = false;
+
+        while (!removedSuccessfully) {
+            Integer articleNumber = promptForIntOrCancel("Enter article number ");
+            if (articleNumber == null) return;
+
+            boolean result = cartService.removeProductFromCart_byArticleNumber(articleNumber);
+
+            if (result == true){
+                System.out.println("Product successfully removed from cart!");
+                removedSuccessfully = true;
+            } else {
+                System.out.println("Product could not be removed from cart. Please try again!");
+            }
+        }
+
+    }
+
 
 }
