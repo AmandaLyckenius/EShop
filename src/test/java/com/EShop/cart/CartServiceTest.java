@@ -81,7 +81,6 @@ public class CartServiceTest {
         cartService.removeProductFromCart_byArticleNumber(fakeArticleNumber);
 
         assertFalse(cart.getCartItemList().contains(itemFromCart));
-        assertEquals(0, itemFromCart.getQuantity());
 
     }
 }

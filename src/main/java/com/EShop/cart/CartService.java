@@ -7,6 +7,7 @@ public class CartService {
     ProductService productService;
     CartItemCreator cartItemCreator;
     Cart cart;
+    CartItem cartItem;
 
     public CartService(ProductService productService, CartItemCreator cartItemCreator, Cart cart) {
         this.productService = productService;
@@ -15,7 +16,7 @@ public class CartService {
     }
 
     public boolean addProductToCart_byArticleNumberAndQuantity(int articleNumber, int quantity){
-        CartItem cartItem = cartItemCreator.createCartItem(articleNumber, quantity);
+        cartItem = cartItemCreator.createCartItem(articleNumber, quantity);
 
        if (cartItem != null){
            cart.addToCart(cartItem);
@@ -24,6 +25,16 @@ public class CartService {
            return false;
        }
 
+    }
+
+    public boolean removeProductFromCart_byArticleNumber(int articleNumber){
+        for (CartItem item: cart.getCartItemList()){
+            if (item.getProduct().getArticleNumber() == articleNumber){
+                cart.removeFromCart(item);
+                return true;
+            }
+        }
+        return false;
     }
 
 
