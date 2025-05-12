@@ -42,8 +42,18 @@ public class ConsoleUI {
         }
     }
 
-    int createScannerInt() {
-        return scanner.nextInt();
+    public Integer promptForIntOrCancel(String prompt) {
+        System.out.println(prompt + " (or type 'q' to cancel):");
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("q")) return null;
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            return promptForIntOrCancel(prompt);
+        }
     }
 
     String createScannerString() {
@@ -97,11 +107,10 @@ public class ConsoleUI {
         boolean addedSuccessfully = false;
 
         while (!addedSuccessfully) {
-
-            System.out.println("Please enter article number for the product you would like to add: ");
-            int articleNumber = createScannerInt();
-            System.out.println("Please enter quantity:");
-            int quantity = createScannerInt();
+            Integer articleNumber = promptForIntOrCancel("Enter article number ");
+            if (articleNumber == null) return;
+            Integer quantity = promptForIntOrCancel("Enter quantity ");
+            if (quantity == null) return;
 
             boolean result = cartService.addProductToCart_byArticleNumberAndQuantity(articleNumber, quantity);
 
