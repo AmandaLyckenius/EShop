@@ -4,6 +4,8 @@ import com.EShop.cart.CartItem;
 import com.EShop.cart.CartItemCreator;
 import com.EShop.cart.CartService;
 import com.EShop.discount.Discount;
+import com.EShop.discount.TenPercent;
+import com.EShop.discount.TwentyPercent;
 import com.EShop.product.Product;
 import com.EShop.product.ProductService;
 
@@ -18,31 +20,36 @@ public class ConsoleUI {
     ProductService productService;
     CartService cartService;
     Checkout checkout;
+    TenPercent tenPercent;
+    TwentyPercent twentyPercent;
 
-    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout) {
+    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, TenPercent tenPercent, TwentyPercent twentyPercent) {
         this.cart = cart;
         this.cartItemCreator = cartItemCreator;
         this.productService = productService;
         this.checkout=checkout;
+        this.cartService=cartService;
+        this.tenPercent=tenPercent;
+        this.twentyPercent=twentyPercent;
     }
 
     public String getWelcomeMessage() {
         return "Welcome to STI Bakery";
     }
 
-    public void printWelcomeMenu(List<Product> allProducts) {
+    public void start(List<Product> allProducts) {
         System.out.println(getWelcomeMessage());
         showProducts(allProducts);
         System.out.println(options());
-//        getUserInput();
+        getUserInput();
     }
 
-//    private void getUserInput() {
-//        while (running) {
-//            int userInput = createScannerInt();
-//            processInput(userInput);
-//        }
-//    }
+    private void getUserInput() {
+        while (running) {
+            int userInput = createScannerInt();
+            processInput(userInput);
+        }
+    }
 
     public Integer promptForIntOrCancel(String prompt) {
         System.out.println(prompt + " (or type 'q' to cancel):");
@@ -62,7 +69,19 @@ public class ConsoleUI {
         return scanner.next();
     }
 
+    int createScannerInt() {
+        return scanner.nextInt();
+    }
+
+
+
     public boolean processInput(int input) {
+        switch (input) {
+            case 1 -> handleAddToCart();
+            case 2 -> handleRemoveFromCart();
+            case 3 -> handleShowCart();
+            case 6 -> handleCheckout();
+        }
         return false;
     }
 
@@ -88,9 +107,10 @@ public class ConsoleUI {
 
     }
 
-    public void showCart(Discount discount) {
+    public void handleShowCart() {
         if (cart.getCartItemList().isEmpty()) {
-            System.out.println("You don't have any articles in your cart");
+            System.out.println("You don't have any articles in your cart. What do you want to do next?");
+            return;
         } else {
             System.out.println("You have following products in your cart:");
             for (CartItem cartItem: cart.getCartItemList() ){
@@ -100,9 +120,10 @@ public class ConsoleUI {
             System.out.println("-----------------------------");
 
             double totalBefore = cart.calculateTotalBeforeDiscount();
+            double totalAfter = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
             System.out.println("Total amount before discount: " + totalBefore);
-            System.out.println("Discount amount: " + discount.discountAmount(totalBefore));
-            System.out.println("Total amount after discount: " + discount.applyDiscount(totalBefore));
+            System.out.println("Discount amount: " + (totalBefore-totalAfter));
+            System.out.println("Total amount after discount: " + totalAfter);
         }
     }
 

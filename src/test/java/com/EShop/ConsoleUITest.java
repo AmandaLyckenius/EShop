@@ -2,6 +2,7 @@ package com.EShop;
 import com.EShop.cart.Cart;
 import com.EShop.cart.CartItem;
 import com.EShop.cart.CartItemCreator;
+import com.EShop.cart.CartService;
 import com.EShop.discount.TenPercent;
 import com.EShop.discount.TwentyPercent;
 import com.EShop.product.Product;
@@ -28,6 +29,7 @@ class ConsoleUITest {
     Customer customer;
     TenPercent tenPercent;
     TwentyPercent twentyPercent;
+    CartService cartService;
 
     @BeforeEach
     public void setUp() {
@@ -47,10 +49,12 @@ class ConsoleUITest {
         customer = new Customer(0);
         tenPercent = new TenPercent();
         twentyPercent= new TwentyPercent();
+        cartService = new CartService(productService, cartItemCreator, cart);
+
 
         checkout = new Checkout(customer,cart,tenPercent,twentyPercent);
 
-        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout);
+        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, tenPercent, twentyPercent);
     }
 
     @Test

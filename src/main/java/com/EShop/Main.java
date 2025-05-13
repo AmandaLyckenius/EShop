@@ -2,10 +2,13 @@ package com.EShop;
 
 import com.EShop.cart.Cart;
 import com.EShop.cart.CartItem;
+import com.EShop.cart.CartItemCreator;
+import com.EShop.cart.CartService;
 import com.EShop.discount.Discount;
 import com.EShop.discount.TenPercent;
 import com.EShop.discount.TwentyPercent;
 import com.EShop.product.Product;
+import com.EShop.product.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,16 @@ public class Main {
         Discount discount20 = new TwentyPercent();
         List<CartItem> cartItemList = new ArrayList<>();
         Cart cart = new Cart(cartItemList);
+        ProductService productService = new ProductService(allProducts);
+        CartItemCreator cartItemCreator = new CartItemCreator(productService);
+        Customer customer = new Customer(500);
+        TenPercent tenPercent = new TenPercent();
+        TwentyPercent twentyPercent = new TwentyPercent();
+        CartService cartService = new CartService(productService, cartItemCreator, cart);
+        Checkout checkout = new Checkout(customer, cart, tenPercent, twentyPercent);
+        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, tenPercent, twentyPercent);
+
+        consoleUI.start(allProducts);
 
 
 
