@@ -51,21 +51,9 @@ public class Cart {
         return total;
     }
 
-    public double calculateTotalAfterDiscountTenPercent(TenPercent tenPercent) {
+    public double calculateTotalAfterDiscount(TenPercent tenPercent, TwentyPercent twentyPercent) {
         return 0;
     }
-
-    public double calculateTotalAfterDiscountTwentyPercent(TwentyPercent twentyPercent) {
-        return 0;
-    }
-
-
-
-
-
-
-
-
 
 
 }

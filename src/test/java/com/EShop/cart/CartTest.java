@@ -22,17 +22,21 @@ class CartTest {
     CartItem laptopItem;
     CartItem tvItem;
     CartItem bottleItem;
+    TenPercent tenPercent;
+    TwentyPercent twentyPercent;
 
     @BeforeEach
     void setUp() {
         cartItemList = new ArrayList<>();
         cart = new Cart(cartItemList);
         laptop = new Product(1, "Laptop", "Macbook", "Electronic", 10000.00);
-        tv = new Product(2, "TV", "Samsung", "Electronic", 2000.00);
+        tv = new Product(2, "TV", "Samsung", "Electronic", 200.00);
         bottle = new Product (3, "Bottle", "Samsung", "Electronic", 80.00);
         laptopItem = new CartItem(laptop, 1);
         tvItem = new CartItem(tv, 2);
         bottleItem = new CartItem(bottle, 1);
+        tenPercent = new TenPercent();
+        twentyPercent = new TwentyPercent();
     }
 
     @Test
@@ -63,27 +67,24 @@ class CartTest {
     @Test
     @DisplayName("Test calculating Cart's total amount after 10 percent discount")
     void calculateTotalAfterDiscountIfTotalExceed100() {
-        TenPercent tenPercent = new TenPercent();
-        cart.addToCart(laptopItem);
-        double newTotal = cart.calculateTotalAfterDiscountTenPercent(tenPercent);
-        assertEquals(9000.00, newTotal);
+        cart.addToCart(tvItem);
+        double newTotal = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
+        assertEquals(180.00, newTotal);
     }
 
     @Test
     @DisplayName("Test calculating Cart's total amount after 10 percent discount")
     void calculateTotalAfterDiscountIfTotalDoNotExceed100() {
-        TenPercent tenPercent = new TenPercent();
         cart.addToCart(bottleItem);
-        double newTotal = cart.calculateTotalAfterDiscountTenPercent(tenPercent);
+        double newTotal = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
         assertEquals(80, newTotal);
     }
 
     @Test
     @DisplayName("Test calculating Cart's total amount after twenty percent discount")
     void calculateTotalAfterDiscountIfTotalExceed300() {
-        TwentyPercent twentyPercent = new TwentyPercent();
         cart.addToCart(laptopItem);
-        double newTotal = cart.calculateTotalAfterDiscountTwentyPercent(twentyPercent);
+        double newTotal = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
         assertEquals(8000.00, newTotal);
     }
 }
