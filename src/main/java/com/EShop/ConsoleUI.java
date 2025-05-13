@@ -32,15 +32,15 @@ public class ConsoleUI {
         System.out.println(getWelcomeMessage());
         showProducts(allProducts);
         System.out.println(options());
-        getUserInput();
+//        getUserInput();
     }
 
-    private void getUserInput() {
-        while (running) {
-            int userInput = createScannerInt();
-            processInput(userInput);
-        }
-    }
+//    private void getUserInput() {
+//        while (running) {
+//            int userInput = createScannerInt();
+//            processInput(userInput);
+//        }
+//    }
 
     public Integer promptForIntOrCancel(String prompt) {
         System.out.println(prompt + " (or type 'q' to cancel):");

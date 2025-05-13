@@ -1,5 +1,9 @@
 package com.EShop.cart;
 
+import com.EShop.discount.Discount;
+import com.EShop.discount.TenPercent;
+import com.EShop.discount.TwentyPercent;
+
 import java.util.List;
 
 public class Cart {
@@ -46,6 +50,17 @@ public class Cart {
         }
         return total;
     }
+
+    public double calculateTotalAfterDiscountTenPercent(TenPercent tenPercent) {
+        return 0;
+    }
+
+    public double calculateTotalAfterDiscountTwentyPercent(TwentyPercent twentyPercent) {
+        return 0;
+    }
+
+
+
 
 
 
