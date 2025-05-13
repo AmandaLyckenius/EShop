@@ -33,7 +33,7 @@ class CartTest {
         tv = new Product(2, "TV", "Samsung", "Electronic", 200.00);
         bottle = new Product (3, "Bottle", "Samsung", "Electronic", 80.00);
         laptopItem = new CartItem(laptop, 1);
-        tvItem = new CartItem(tv, 2);
+        tvItem = new CartItem(tv, 1);
         bottleItem = new CartItem(bottle, 1);
         tenPercent = new TenPercent();
         twentyPercent = new TwentyPercent();

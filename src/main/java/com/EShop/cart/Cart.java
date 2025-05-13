@@ -52,8 +52,13 @@ public class Cart {
     }
 
     public double calculateTotalAfterDiscount(TenPercent tenPercent, TwentyPercent twentyPercent) {
-        return 0;
+        double total = calculateTotalBeforeDiscount();
+        if (total >= 100) {
+            total = tenPercent.applyDiscount(calculateTotalBeforeDiscount());
+        }
+        if (total >= 300) {
+            total = twentyPercent.applyDiscount(calculateTotalBeforeDiscount());
+        }
+        return total;
     }
-
-
 }
