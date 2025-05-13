@@ -2,6 +2,7 @@ package com.EShop;
 import com.EShop.cart.Cart;
 import com.EShop.cart.CartItem;
 import com.EShop.cart.CartItemCreator;
+import com.EShop.cart.CartService;
 import com.EShop.discount.Discount;
 import com.EShop.product.Product;
 import com.EShop.product.ProductService;
@@ -15,6 +16,7 @@ public class ConsoleUI {
     Cart cart;
     CartItemCreator cartItemCreator;
     ProductService productService;
+    CartService cartService;
 
     public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService) {
         this.cart = cart;
@@ -40,8 +42,18 @@ public class ConsoleUI {
         }
     }
 
-    int createScannerInt() {
-        return scanner.nextInt();
+    public Integer promptForIntOrCancel(String prompt) {
+        System.out.println(prompt + " (or type 'q' to cancel):");
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("q")) return null;
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            return promptForIntOrCancel(prompt);
+        }
     }
 
     String createScannerString() {
@@ -89,6 +101,45 @@ public class ConsoleUI {
             System.out.println("Discount amount: " + discount.discountAmount(totalBefore));
             System.out.println("Total amount after discount: " + discount.applyDiscount(totalBefore));
         }
+    }
+
+    public void handleAddToCart() {
+        boolean addedSuccessfully = false;
+
+        while (!addedSuccessfully) {
+            Integer articleNumber = promptForIntOrCancel("Enter article number ");
+            if (articleNumber == null) return;
+            Integer quantity = promptForIntOrCancel("Enter quantity ");
+            if (quantity == null) return;
+
+            boolean result = cartService.addProductToCart_byArticleNumberAndQuantity(articleNumber, quantity);
+
+            if (result == true){
+                System.out.println("Product successfully added to cart!");
+                addedSuccessfully = true;
+            } else {
+                System.out.println("Product could not be added to cart. Please try again!");
+            }
+        }
+    }
+
+    public void handleRemoveFromCart() {
+        boolean removedSuccessfully = false;
+
+        while (!removedSuccessfully) {
+            Integer articleNumber = promptForIntOrCancel("Enter article number ");
+            if (articleNumber == null) return;
+
+            boolean result = cartService.removeProductFromCart_byArticleNumber(articleNumber);
+
+            if (result == true){
+                System.out.println("Product successfully removed from cart!");
+                removedSuccessfully = true;
+            } else {
+                System.out.println("Product could not be removed from cart. Please try again!");
+            }
+        }
+
     }
 
 

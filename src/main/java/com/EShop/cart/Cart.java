@@ -14,32 +14,27 @@ public class Cart {
         return cartItemList;
     }
 
-    public List<CartItem> addToCart(CartItem cartItem) {
+    public void addToCart(CartItem cartItem) {
         for (CartItem c : cartItemList) {
             if (c.equals(cartItem)) {
                 c.setQuantity(c.getQuantity() + cartItem.getQuantity());
-                return cartItemList;
+                return;
             }
         }
         cartItemList.add(cartItem);
-        System.out.println(cartItem.getProduct().getArticle() + " successfully added to the cart" + "\n");
-        return cartItemList;
     }
 
-    public List<CartItem> removeFromCart(CartItem cartItem){
+    public void removeFromCart(CartItem cartItem){
         for (CartItem c : cartItemList) {
             if (c.equals(cartItem)) {
-
                 if (c.getQuantity() >= 2) {
                     c.setQuantity(c.getQuantity() - 1);
-                    return cartItemList;
+                } else {
+                    cartItemList.remove(c);
                 }
-
+                return;
             }
         }
-        cartItemList.remove(cartItem);
-        System.out.println(cartItem.getProduct().getArticle() + " successfully removed from the cart" + "\n");
-        return cartItemList;
 
     }
 
