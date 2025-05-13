@@ -3,39 +3,33 @@ package com.EShop;
 import com.EShop.cart.Cart;
 
 public class Customer {
-    private String name;
-    private double saldo;
+    private double balance;
 
-    private Cart cart;
-
-    public Customer(String name, double saldo, Cart cart) {
-        this.name = name;
-        this.saldo = saldo;
-        this.cart = cart;
+    public Customer(double balance) {
+        this.balance = balance;
     }
 
-    public String getName() {
-        return name;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void addBalance(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount must be positive.");
+        }
+        balance += amount;
     }
 
-    public double getSaldo() {
-        return saldo;
+    public boolean deductBalance(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public double getBalance() {
+        return balance;
     }
 
 }
