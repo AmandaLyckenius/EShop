@@ -2,6 +2,8 @@ package com.EShop;
 import com.EShop.cart.Cart;
 import com.EShop.cart.CartItem;
 import com.EShop.cart.CartItemCreator;
+import com.EShop.discount.TenPercent;
+import com.EShop.discount.TwentyPercent;
 import com.EShop.product.Product;
 import com.EShop.product.ProductService;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +24,10 @@ class ConsoleUITest {
     ConsoleUI consoleUI;
     CartItem laptopItem;
     CartItem tvItem;
+    Checkout checkout;
+    Customer customer;
+    TenPercent tenPercent;
+    TwentyPercent twentyPercent;
 
     @BeforeEach
     public void setUp() {
@@ -38,8 +44,13 @@ class ConsoleUITest {
         laptopItem = new CartItem(laptop, 1);
         tvItem = new CartItem(tv, 1);
         cart = new Cart(new ArrayList<>());
+        customer = new Customer(0);
+        tenPercent = new TenPercent();
+        twentyPercent= new TwentyPercent();
 
-        consoleUI =new ConsoleUI(cart,cartItemCreator,productService);
+        checkout = new Checkout(customer,cart,tenPercent,twentyPercent);
+
+        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout);
     }
 
     @Test
@@ -74,8 +85,9 @@ class ConsoleUITest {
                 "1) Add product to cart \n" +
                 "2) Remove product from cart \n" +
                 "3) View cart summary \n" +
-                "4) Check saldo \n" +
-                "5) Checkout", options);
+                "4) Check balance \n" +
+                "5) Add balance \n" +
+                "6) Checkout", options);
     }
 
 

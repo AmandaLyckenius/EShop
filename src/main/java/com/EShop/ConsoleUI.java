@@ -17,11 +17,13 @@ public class ConsoleUI {
     CartItemCreator cartItemCreator;
     ProductService productService;
     CartService cartService;
+    Checkout checkout;
 
-    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService) {
+    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout) {
         this.cart = cart;
         this.cartItemCreator = cartItemCreator;
         this.productService = productService;
+        this.checkout=checkout;
     }
 
     public String getWelcomeMessage() {
@@ -71,8 +73,9 @@ public class ConsoleUI {
                 "1) Add product to cart \n" +
                 "2) Remove product from cart \n" +
                 "3) View cart summary \n" +
-                "4) Check saldo \n" +
-                "5) Checkout";
+                "4) Check balance \n" +
+                "5) Add balance \n" +
+                "6) Checkout";
     }
 
 
@@ -138,6 +141,19 @@ public class ConsoleUI {
             } else {
                 System.out.println("Product could not be removed from cart. Please try again!");
             }
+        }
+
+    }
+
+    public void handleCheckout() {
+
+        boolean checkoutSum = checkout.pay();
+
+        if (checkoutSum){
+            System.out.println("Success!");
+        }
+        if (!checkoutSum){
+            System.out.println("Not enough money, add more balance to checkout");
         }
 
     }
