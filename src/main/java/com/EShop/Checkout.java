@@ -19,6 +19,14 @@ TwentyPercent twentyPercent;
     }
 
     public boolean pay(){
+        double balance = customer.getBalance();
+
+        double total = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
+
+        if (balance >= total){
+            customer.setBalance(balance - total);
+            return true;
+        }
 
         return false;
     }
