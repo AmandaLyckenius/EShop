@@ -9,6 +9,10 @@ public class Customer {
         this.balance = balance;
     }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     public void addBalance(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Amount must be positive.");
