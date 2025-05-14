@@ -54,7 +54,7 @@ class ConsoleUITest {
 
         checkout = new Checkout(customer,cart,tenPercent,twentyPercent);
 
-        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, tenPercent, twentyPercent, customer);
+        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, tenPercent, twentyPercent, customer, productList);
     }
 
     @Test
@@ -86,12 +86,13 @@ class ConsoleUITest {
     void options() {
         String options = consoleUI.options();
         assertEquals("\nWhat do you want to do next? \n" +
-                "1) Add product to cart \n" +
-                "2) Remove product from cart \n" +
-                "3) View cart summary \n" +
-                "4) Check balance \n" +
-                "5) Add balance \n" +
-                "6) Checkout", options);
+                "1) View products\n" +
+                "2) Add product to cart \n" +
+                "3) Remove product from cart \n" +
+                "4) View cart summary \n" +
+                "5) Check balance \n" +
+                "6) Add balance \n" +
+                "7) Checkout", options);
     }
 
 
