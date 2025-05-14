@@ -22,15 +22,17 @@ public class ConsoleUI {
     Checkout checkout;
     TenPercent tenPercent;
     TwentyPercent twentyPercent;
+    Customer customer;
 
-    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, TenPercent tenPercent, TwentyPercent twentyPercent) {
+    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, TenPercent tenPercent, TwentyPercent twentyPercent, Customer customer) {
         this.cart = cart;
         this.cartItemCreator = cartItemCreator;
         this.productService = productService;
-        this.checkout=checkout;
-        this.cartService=cartService;
-        this.tenPercent=tenPercent;
-        this.twentyPercent=twentyPercent;
+        this.checkout = checkout;
+        this.cartService = cartService;
+        this.tenPercent = tenPercent;
+        this.twentyPercent = twentyPercent;
+        this.customer = customer;
     }
 
     public String getWelcomeMessage() {
@@ -47,6 +49,7 @@ public class ConsoleUI {
     private void getUserInput() {
         while (running) {
             int userInput = createScannerInt();
+            scanner.nextLine();
             processInput(userInput);
         }
     }
@@ -55,7 +58,11 @@ public class ConsoleUI {
         System.out.println(prompt + " (or type 'q' to cancel):");
         String input = scanner.nextLine();
 
-        if (input.equalsIgnoreCase("q")) return null;
+        if (input.equalsIgnoreCase("q")) {
+            System.out.println("Action cancelled.");
+            System.out.println("What do you want to do next?");
+            return null;
+        }
 
         try {
             return Integer.parseInt(input);
@@ -74,17 +81,17 @@ public class ConsoleUI {
     }
 
 
-
     public boolean processInput(int input) {
         switch (input) {
             case 1 -> handleAddToCart();
             case 2 -> handleRemoveFromCart();
             case 3 -> handleShowCart();
+            case 4 -> handleCheckBalance();
+            case 5 -> handleAddBalance();
             case 6 -> handleCheckout();
         }
         return false;
     }
-
 
 
     public String options() {
@@ -98,7 +105,7 @@ public class ConsoleUI {
     }
 
 
-    public void showProducts(List <Product> allProducts) {
+    public void showProducts(List<Product> allProducts) {
         System.out.println("View our products below");
 
         for (Product product : allProducts) {
@@ -109,11 +116,14 @@ public class ConsoleUI {
 
     public void handleShowCart() {
         if (cart.getCartItemList().isEmpty()) {
-            System.out.println("You don't have any articles in your cart. What do you want to do next?");
+            System.out.println("Your cart is empty.");
+            System.out.println("What do you want to do next?");
             return;
-        } else {
+        } 
+
+
             System.out.println("You have following products in your cart:");
-            for (CartItem cartItem: cart.getCartItemList() ){
+            for (CartItem cartItem : cart.getCartItemList()) {
                 System.out.println(cartItem);
             }
 
@@ -121,63 +131,93 @@ public class ConsoleUI {
 
             double totalBefore = cart.calculateTotalBeforeDiscount();
             double totalAfter = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
-            System.out.println("Total amount before discount: " + totalBefore);
-            System.out.println("Discount amount: " + (totalBefore-totalAfter));
-            System.out.println("Total amount after discount: " + totalAfter);
-        }
+            double discountAmount = totalBefore - totalAfter;
+                System.out.printf("Total before discount: %.2f kr%n", totalBefore);
+                System.out.printf("Discount applied: %.2f kr%n", discountAmount);
+                System.out.printf("Total after discount: %.2f kr%n", totalAfter);
+            System.out.println("What do you want to do next?");
+
     }
 
     public void handleAddToCart() {
-        boolean addedSuccessfully = false;
-
-        while (!addedSuccessfully) {
+        while (true) {
             Integer articleNumber = promptForIntOrCancel("Enter article number ");
             if (articleNumber == null) return;
+            if (!cartService.productExists(articleNumber)) {
+                System.out.println("Article number not found. Please try again.");
+                continue;
+            }
             Integer quantity = promptForIntOrCancel("Enter quantity ");
             if (quantity == null) return;
 
             boolean result = cartService.addProductToCart_byArticleNumberAndQuantity(articleNumber, quantity);
 
-            if (result == true){
+            if (result) {
                 System.out.println("Product successfully added to cart!");
-                addedSuccessfully = true;
-            } else {
-                System.out.println("Product could not be added to cart. Please try again!");
+                break;
             }
         }
+        System.out.println("What do you want to do next?");
     }
 
     public void handleRemoveFromCart() {
-        boolean removedSuccessfully = false;
-
-        while (!removedSuccessfully) {
+        while (true) {
             Integer articleNumber = promptForIntOrCancel("Enter article number ");
             if (articleNumber == null) return;
 
-            boolean result = cartService.removeProductFromCart_byArticleNumber(articleNumber);
-
-            if (result == true){
-                System.out.println("Product successfully removed from cart!");
-                removedSuccessfully = true;
-            } else {
-                System.out.println("Product could not be removed from cart. Please try again!");
+            if (!cart.containsArticleNumber(articleNumber)) {
+                System.out.println("That product is not in your cart. Please try again.");
+                continue;
             }
+            cartService.removeProductFromCart_byArticleNumber(articleNumber);
+            System.out.println("Product successfully removed from cart!");
+            break;
         }
-
+        System.out.println("What do you want to do next?");
     }
+
+
 
     public void handleCheckout() {
 
         boolean checkoutSum = checkout.pay();
 
         if (checkoutSum){
-            System.out.println("Success!");
+            System.out.println("Payment successful! Thank you for shopping with us.");
         }
-        if (!checkoutSum){
-            System.out.println("Not enough money, add more balance to checkout");
+        else {
+            System.out.println("Not enough balance to complete your purchase.");
+            System.out.println("Please select option 5 from the menu to add more balance.");
         }
 
     }
 
+   public void handleCheckBalance() {
+       System.out.printf("Your current balance is: %.2f kr%n", customer.getBalance());
+       System.out.println("What do you want to do next?");
+   }
 
-}
+   public void handleAddBalance() {
+       System.out.println("Enter amount to add (or type 'q' to cancel):");
+       String input = scanner.nextLine();
+
+       if (input.equalsIgnoreCase("q")) {
+           System.out.println("Action cancelled.");
+       }
+       else {
+           try {
+               double amount = Double.parseDouble(input);
+               customer.addBalance(amount);
+               System.out.printf("%.2f kr has been added to your balance.%n", amount);
+               System.out.printf("New balance: %.2f kr%n", customer.getBalance());
+           } catch (NumberFormatException e) {
+               System.out.println("Invalid input. Please enter a number.");
+           } catch (IllegalArgumentException e) {
+               System.out.println(e.getMessage());
+           }
+       }
+       System.out.println("What do you want to do next?");
+   }
+
+
+    }

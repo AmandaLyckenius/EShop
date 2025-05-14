@@ -37,6 +37,12 @@ public class CartService {
         return false;
     }
 
+    public boolean productExists(int articleNumber) {
+        return productService.getAllProducts().stream()
+                .anyMatch(p -> p.getArticleNumber() == articleNumber);
+    }
+
+
 
 
 }

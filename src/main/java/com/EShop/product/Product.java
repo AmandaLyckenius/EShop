@@ -70,7 +70,7 @@ public class Product {
         return
                 "\n" +
                 article + "\n" + "Article number: " + articleNumber + "\n" + "Description: " + description + "\n" +
-                "Price: " + price + " kr";
+                "Price: " + price + " kr" + "\n";
     }
 
     @Override

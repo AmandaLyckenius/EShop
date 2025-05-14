@@ -54,7 +54,7 @@ class ConsoleUITest {
 
         checkout = new Checkout(customer,cart,tenPercent,twentyPercent);
 
-        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, tenPercent, twentyPercent);
+        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, tenPercent, twentyPercent, customer);
     }
 
     @Test
