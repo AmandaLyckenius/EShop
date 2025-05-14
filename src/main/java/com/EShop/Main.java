@@ -29,9 +29,9 @@ public class Main {
         TwentyPercent twentyPercent = new TwentyPercent();
         CartService cartService = new CartService(productService, cartItemCreator, cart);
         Checkout checkout = new Checkout(customer, cart, tenPercent, twentyPercent);
-        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, tenPercent, twentyPercent, customer);
+        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, tenPercent, twentyPercent, customer, allProducts);
 
-        consoleUI.start(allProducts);
+        consoleUI.start();
 
 
 

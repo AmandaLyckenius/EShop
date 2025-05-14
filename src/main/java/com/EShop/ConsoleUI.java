@@ -23,8 +23,9 @@ public class ConsoleUI {
     TenPercent tenPercent;
     TwentyPercent twentyPercent;
     Customer customer;
+    List<Product> allProducts;
 
-    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, TenPercent tenPercent, TwentyPercent twentyPercent, Customer customer) {
+    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, TenPercent tenPercent, TwentyPercent twentyPercent, Customer customer, List<Product> allProducts) {
         this.cart = cart;
         this.cartItemCreator = cartItemCreator;
         this.productService = productService;
@@ -33,15 +34,16 @@ public class ConsoleUI {
         this.tenPercent = tenPercent;
         this.twentyPercent = twentyPercent;
         this.customer = customer;
+        this.allProducts=allProducts;
     }
 
     public String getWelcomeMessage() {
         return "Welcome to STI Bakery";
     }
 
-    public void start(List<Product> allProducts) {
+    public void start() {
         System.out.println(getWelcomeMessage());
-        showProducts(allProducts);
+        showProducts();
         System.out.println(options());
         getUserInput();
     }
@@ -78,12 +80,13 @@ public class ConsoleUI {
 
     public boolean processInput(int input) {
         switch (input) {
-            case 1 -> handleAddToCart();
-            case 2 -> handleRemoveFromCart();
-            case 3 -> handleShowCart();
-            case 4 -> handleCheckBalance();
-            case 5 -> handleAddBalance();
-            case 6 -> handleCheckout();
+            case 1 -> showProducts();
+            case 2 -> handleAddToCart();
+            case 3 -> handleRemoveFromCart();
+            case 4 -> handleShowCart();
+            case 5 -> handleCheckBalance();
+            case 6 -> handleAddBalance();
+            case 7 -> handleCheckout();
             default -> {
                 System.out.println("Incorrect input");
                 System.out.println(options());
@@ -95,16 +98,17 @@ public class ConsoleUI {
 
     public String options() {
         return "\nWhat do you want to do next? \n" +
-                "1) Add product to cart \n" +
-                "2) Remove product from cart \n" +
-                "3) View cart summary \n" +
-                "4) Check balance \n" +
-                "5) Add balance \n" +
-                "6) Checkout";
+                "1) View products\n" +
+                "2) Add product to cart \n" +
+                "3) Remove product from cart \n" +
+                "4) View cart summary \n" +
+                "5) Check balance \n" +
+                "6) Add balance \n" +
+                "7) Checkout";
     }
 
 
-    public void showProducts(List<Product> allProducts) {
+    public void showProducts() {
         System.out.println("View our products below");
 
         for (Product product : allProducts) {
