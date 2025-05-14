@@ -85,7 +85,7 @@ class ConsoleUITest {
     @Test
     void options() {
         String options = consoleUI.options();
-        assertEquals("What do you want to do next? \n" +
+        assertEquals("\nWhat do you want to do next? \n" +
                 "1) Add product to cart \n" +
                 "2) Remove product from cart \n" +
                 "3) View cart summary \n" +
