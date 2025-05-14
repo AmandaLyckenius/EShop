@@ -35,10 +35,10 @@ public class CartItem {
 
     @Override
     public String toString() {
-        return "CartItem{" +
-                "product=" + product +
-                ", quantity=" + quantity +
-                '}';
+        return "- " + product.getArticle() +
+                "\n  Quantity: " + quantity +
+                "\n  Price per item: " + product.getPrice() + " kr" +
+                "\n  Subtotal: " + (product.getPrice() * quantity) + " kr";
     }
 
     @Override
@@ -53,4 +53,5 @@ public class CartItem {
     public int hashCode() {
         return Objects.hash(product.getArticleNumber());
     }
+
 }

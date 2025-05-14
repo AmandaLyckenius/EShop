@@ -61,4 +61,10 @@ public class Cart {
         }
         return total;
     }
+
+    public boolean containsArticleNumber(int articleNumber) {
+        return cartItemList.stream()
+                .anyMatch(item -> item.getProduct().getArticleNumber() == articleNumber);
+    }
+
 }

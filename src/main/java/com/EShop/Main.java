@@ -24,12 +24,12 @@ public class Main {
         Cart cart = new Cart(cartItemList);
         ProductService productService = new ProductService(allProducts);
         CartItemCreator cartItemCreator = new CartItemCreator(productService);
-        Customer customer = new Customer(500);
+        Customer customer = new Customer(10);
         TenPercent tenPercent = new TenPercent();
         TwentyPercent twentyPercent = new TwentyPercent();
         CartService cartService = new CartService(productService, cartItemCreator, cart);
         Checkout checkout = new Checkout(customer, cart, tenPercent, twentyPercent);
-        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, tenPercent, twentyPercent);
+        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, tenPercent, twentyPercent, customer);
 
         consoleUI.start(allProducts);
 
