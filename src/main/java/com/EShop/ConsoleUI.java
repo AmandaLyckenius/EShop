@@ -12,20 +12,17 @@ import java.util.Scanner;
 
 public class ConsoleUI {
     private boolean running = true;
-    private final Scanner scanner = new Scanner(System.in);
-    Cart cart;
-    CartItemCreator cartItemCreator;
-    ProductService productService;
-    CartService cartService;
-    Checkout checkout;
-    List <Discount> discounts;
-    Customer customer;
-    List<Product> allProducts;
+    private final Scanner scanner;
+    private final Cart cart;
+    private final CartService cartService;
+    private final Checkout checkout;
+    private final List <Discount> discounts;
+    private final Customer customer;
+    private final List<Product> allProducts;
 
-    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, List <Discount> discounts, Customer customer, List<Product> allProducts) {
+    public ConsoleUI(Scanner scanner, Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, List <Discount> discounts, Customer customer, List<Product> allProducts) {
+        this.scanner = scanner;
         this.cart = cart;
-        this.cartItemCreator = cartItemCreator;
-        this.productService = productService;
         this.checkout = checkout;
         this.cartService = cartService;
         this.discounts=discounts;
@@ -86,9 +83,10 @@ public class ConsoleUI {
             default -> {
                 System.out.println("Incorrect input");
                 System.out.println(options());
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
 
@@ -196,7 +194,7 @@ public class ConsoleUI {
         }
         else {
             System.out.println("Not enough balance to complete your purchase.");
-            System.out.println("Please select option 5 from the menu to add more balance.");
+            System.out.println("Please select option 6 from the menu to add more balance.");
         }
 
     }

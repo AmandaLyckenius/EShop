@@ -13,47 +13,43 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConsoleUITest {
 
-    Product laptop;
-    Product tv;
-    List<Product> productList;
-    ProductService productService;
-    Cart cart;
-    CartItemCreator cartItemCreator;
-    ConsoleUI consoleUI;
-    CartItem laptopItem;
-    CartItem tvItem;
-    Checkout checkout;
-    Customer customer;
-    List <Discount> discounts;
-    CartService cartService;
+    private List<Product> productList;
+    private Cart cart;
+    private ConsoleUI consoleUI;
+    private CartItem laptopItem;
+    private CartItem tvItem;
+
 
     @BeforeEach
     public void setUp() {
-        laptop = new Product(1,"Laptop", "Macbook", "Electronic", 10000.00);
-        tv = new Product(2,"TV","Samsung", "Electronic", 2000.00);
+        Product laptop = new Product(1, "Laptop", "Macbook", "Electronic", 10000.00);
+        Product tv = new Product(2, "TV", "Samsung", "Electronic", 2000.00);
 
         productList= new ArrayList<>();
         productList.add(laptop);
         productList.add(tv);
 
-        productService = new ProductService(productList);
-        cartItemCreator = new CartItemCreator(productService);
+        ProductService productService = new ProductService(productList);
+        CartItemCreator cartItemCreator = new CartItemCreator(productService);
 
         laptopItem = new CartItem(laptop, 1);
         tvItem = new CartItem(tv, 1);
         cart = new Cart(new ArrayList<>());
-        customer = new Customer(0);
-        discounts = List.of(new TenPercent(), new TwentyPercent());
-        cartService = new CartService(productService, cartItemCreator, cart);
+        Customer customer = new Customer(0);
+        List<Discount> discounts = List.of(new TenPercent(), new TwentyPercent());
+        CartService cartService = new CartService(productService, cartItemCreator, cart);
+        Scanner scanner = new Scanner(System.in);
 
 
-        checkout = new Checkout(customer,cart,discounts);
+        Checkout checkout = new Checkout(customer, cart, discounts);
 
-        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, discounts, customer, productList);
+        consoleUI =new ConsoleUI(scanner, cart, cartItemCreator, productService, checkout, cartService, discounts, customer, productList);
     }
 
     @Test
@@ -103,18 +99,24 @@ class ConsoleUITest {
     }
 
     @Test
-    void processInputCase2() {
-        int fakeInput = 2;
+    void processInputCase4() {
+        int fakeInput = 4;
         boolean result= consoleUI.processInput(fakeInput);
         assertTrue(result);
     }
 
    @Test
-    void processInputCase3() {
-        int fakeInput = 3;
+    void processInputCase5() {
+        int fakeInput = 5;
         boolean result= consoleUI.processInput(fakeInput);
         assertTrue(result);
     }
 
+    @Test
+    void testProcessInputDefault(){
+        int fakeInput = 0;
+        boolean result= consoleUI.processInput(fakeInput);
+        assertFalse(result);
+    }
 
 }

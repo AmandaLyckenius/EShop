@@ -11,9 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CartItemCreatorTest {
 
-    List<Product> productList;
-    ProductService productService;
-    CartItemCreator cartItemCreator;
+    private List<Product> productList;
+    private CartItemCreator cartItemCreator;
 
     @BeforeEach
     public void setUp() {
@@ -23,7 +22,7 @@ public class CartItemCreatorTest {
 
         ));
 
-        productService = new ProductService(productList);
+        ProductService productService = new ProductService(productList);
         cartItemCreator = new CartItemCreator(productService);
     }
 

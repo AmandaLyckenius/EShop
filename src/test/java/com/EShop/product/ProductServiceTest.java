@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductServiceTest {
 
-    List <Product> productList;
-    ProductService productService;
+    private List <Product> productList;
+    private ProductService productService;
 
     @BeforeEach
     public void setUp() {

@@ -3,11 +3,11 @@ package com.EShop.product;
 import java.util.Objects;
 
 public class Product {
-    int articleNumber;
-    String article;
-    String description;
-    String category;
-    double price;
+    private int articleNumber;
+    private String article;
+    private String description;
+    private String category;
+    private double price;
 
     public Product(int articleNumber, String article, String description, String category, double price) {
         this.articleNumber=articleNumber;
@@ -29,40 +29,12 @@ public class Product {
         return articleNumber;
     }
 
-    public void setArticleNumber(int articleNumber) {
-        this.articleNumber = articleNumber;
-    }
-
     public String getArticle() {
         return article;
     }
 
-    public void setArticle(String article) {
-        this.article = article;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     @Override

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 
-    Customer customer;
+    private Customer customer;
 
     @BeforeEach
     void setUp() {

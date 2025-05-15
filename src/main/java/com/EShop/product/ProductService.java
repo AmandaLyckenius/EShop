@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ProductService {
 
-    List<Product> allProducts;
+    private final List<Product> allProducts;
 
     public ProductService(List<Product> allProducts) {
         this.allProducts = allProducts;

@@ -4,7 +4,7 @@ import com.EShop.product.Product;
 import com.EShop.product.ProductService;
 
 public class CartItemCreator {
-    ProductService productService;
+   private final ProductService productService;
 
     public CartItemCreator(ProductService productService) {
         this.productService = productService;

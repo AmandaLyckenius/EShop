@@ -12,11 +12,13 @@ import com.EShop.product.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
         List <Product> allProducts = getAllProducts();
         List<CartItem> cartItemList = new ArrayList<>();
         Cart cart = new Cart(cartItemList);
@@ -26,7 +28,7 @@ public class Main {
         CartService cartService = new CartService(productService, cartItemCreator, cart);
         List <Discount> discounts = List.of( new TenPercent(), new TwentyPercent());
         Checkout checkout = new Checkout(customer, cart, discounts);
-        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, discounts, customer, allProducts);
+        ConsoleUI consoleUI = new ConsoleUI(scanner, cart,cartItemCreator,productService,checkout, cartService, discounts, customer, allProducts);
 
         consoleUI.start();
 
