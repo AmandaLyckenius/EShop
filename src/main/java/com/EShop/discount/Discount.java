@@ -3,5 +3,6 @@ package com.EShop.discount;
 public interface Discount {
     double applyDiscount(double total);
     double discountAmount(double total);
+    boolean isApplicable(double total);
 
 }

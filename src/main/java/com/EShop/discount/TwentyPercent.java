@@ -10,4 +10,9 @@ public class TwentyPercent implements Discount{
     public double discountAmount(double total) {
         return (total * 0.20);
     }
+
+    @Override
+    public boolean isApplicable(double total) {
+        return total >= 300;
+    }
 }

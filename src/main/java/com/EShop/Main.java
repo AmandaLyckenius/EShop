@@ -18,18 +18,15 @@ public class Main {
     public static void main(String[] args) {
 
         List <Product> allProducts = getAllProducts();
-        Discount discount10 = new TenPercent();
-        Discount discount20 = new TwentyPercent();
         List<CartItem> cartItemList = new ArrayList<>();
         Cart cart = new Cart(cartItemList);
         ProductService productService = new ProductService(allProducts);
         CartItemCreator cartItemCreator = new CartItemCreator(productService);
         Customer customer = new Customer(10);
-        TenPercent tenPercent = new TenPercent();
-        TwentyPercent twentyPercent = new TwentyPercent();
         CartService cartService = new CartService(productService, cartItemCreator, cart);
-        Checkout checkout = new Checkout(customer, cart, tenPercent, twentyPercent);
-        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, tenPercent, twentyPercent, customer, allProducts);
+        List <Discount> discounts = List.of( new TenPercent(), new TwentyPercent());
+        Checkout checkout = new Checkout(customer, cart, discounts);
+        ConsoleUI consoleUI = new ConsoleUI(cart,cartItemCreator,productService,checkout, cartService, discounts, customer, allProducts);
 
         consoleUI.start();
 

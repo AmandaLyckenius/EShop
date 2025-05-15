@@ -1,8 +1,6 @@
 package com.EShop.cart;
 
 import com.EShop.discount.Discount;
-import com.EShop.discount.TenPercent;
-import com.EShop.discount.TwentyPercent;
 
 import java.util.List;
 
@@ -51,13 +49,15 @@ public class Cart {
         return total;
     }
 
-    public double calculateTotalAfterDiscount(TenPercent tenPercent, TwentyPercent twentyPercent) {
+    public double calculateTotalAfterDiscount(List<Discount> discounts) {
         double total = calculateTotalBeforeDiscount();
-        if (total >= 100) {
-            total = tenPercent.applyDiscount(calculateTotalBeforeDiscount());
-        }
-        if (total >= 300) {
-            total = twentyPercent.applyDiscount(calculateTotalBeforeDiscount());
+
+        for (Discount discount: discounts){
+            if (discount.isApplicable(total)){
+                total = discount.applyDiscount(total);
+                break;
+            }
+
         }
         return total;
     }

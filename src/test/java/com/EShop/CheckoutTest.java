@@ -24,8 +24,7 @@ class CheckoutTest {
     CartItem laptopItem;
     CartItem tvItem;
     CartItem bottleItem;
-    TenPercent tenPercent;
-    TwentyPercent twentyPercent;
+    List <Discount> discounts;
     Checkout checkout;
     double fakeBalance;
 
@@ -39,11 +38,10 @@ class CheckoutTest {
         laptopItem = new CartItem(laptop, 1);
         tvItem = new CartItem(tv, 1);
         bottleItem = new CartItem(bottle, 1);
-        tenPercent = new TenPercent();
-        twentyPercent = new TwentyPercent();
+        discounts = List.of(new TenPercent(), new TwentyPercent());
         fakeBalance = 500;
         customer = new Customer(fakeBalance);
-        checkout = new Checkout(customer, cart, tenPercent, twentyPercent);
+        checkout = new Checkout(customer, cart, discounts);
     }
 
     @Test

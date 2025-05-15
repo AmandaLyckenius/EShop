@@ -22,8 +22,8 @@ class CartTest {
     CartItem laptopItem;
     CartItem tvItem;
     CartItem bottleItem;
-    TenPercent tenPercent;
-    TwentyPercent twentyPercent;
+    List<Discount> discounts;
+
 
     @BeforeEach
     void setUp() {
@@ -35,8 +35,8 @@ class CartTest {
         laptopItem = new CartItem(laptop, 1);
         tvItem = new CartItem(tv, 1);
         bottleItem = new CartItem(bottle, 1);
-        tenPercent = new TenPercent();
-        twentyPercent = new TwentyPercent();
+        discounts = List.of(new TenPercent(), new TwentyPercent());
+
     }
 
     @Test
@@ -68,7 +68,7 @@ class CartTest {
     @DisplayName("Test calculating Cart's total amount after 10 percent discount")
     void calculateTotalAfterDiscountIfTotalExceed100() {
         cart.addToCart(tvItem);
-        double newTotal = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
+        double newTotal = cart.calculateTotalAfterDiscount(discounts);
         assertEquals(180.00, newTotal);
     }
 
@@ -76,7 +76,7 @@ class CartTest {
     @DisplayName("Test calculating Cart's total amount after 10 percent discount")
     void calculateTotalAfterDiscountIfTotalDoNotExceed100() {
         cart.addToCart(bottleItem);
-        double newTotal = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
+        double newTotal = cart.calculateTotalAfterDiscount(discounts);
         assertEquals(80, newTotal);
     }
 
@@ -84,7 +84,7 @@ class CartTest {
     @DisplayName("Test calculating Cart's total amount after twenty percent discount")
     void calculateTotalAfterDiscountIfTotalExceed300() {
         cart.addToCart(laptopItem);
-        double newTotal = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
+        double newTotal = cart.calculateTotalAfterDiscount(discounts);
         assertEquals(8000.00, newTotal);
     }
 }
