@@ -1,14 +1,16 @@
 package com.EShop;
 
 import com.EShop.cart.Cart;
+import com.EShop.cart.CartItem;
 import com.EShop.discount.Discount;
 
 import java.util.List;
 
 public class Checkout {
-Customer customer;
-Cart cart;
-List<Discount> discounts;
+private final Customer customer;
+private final Cart cart;
+private final List<Discount> discounts;
+
 
     public Checkout(Customer customer, Cart cart, List <Discount> discounts) {
         this.customer = customer;
@@ -22,7 +24,8 @@ List<Discount> discounts;
         double total = cart.calculateTotalAfterDiscount(discounts);
 
         if (balance >= total){
-            customer.setBalance(balance - total);
+            customer.deductBalance(total);
+            cart.getCartItemList().clear();
             return true;
         }
 

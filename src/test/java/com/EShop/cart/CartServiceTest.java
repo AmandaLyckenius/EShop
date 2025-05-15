@@ -12,31 +12,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CartServiceTest {
 
-    Product laptop;
-    Product tv;
-    List<Product> productList;
-    ProductService productService;
-    Cart cart;
-    CartItemCreator cartItemCreator;
-    ConsoleUI consoleUI;
-    CartItem laptopItem;
-    CartItem tvItem;
-    CartService cartService;
+    private Product laptop;
+    private Cart cart;
+    private ConsoleUI consoleUI;
+    private CartService cartService;
 
     @BeforeEach
     public void setUp() {
         laptop = new Product(1,"Laptop", "Macbook", "Electronic", 10000.00);
-        tv = new Product(2,"TV","Samsung", "Electronic", 2000.00);
+        Product tv = new Product(2, "TV", "Samsung", "Electronic", 2000.00);
 
-        productList= new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         productList.add(laptop);
         productList.add(tv);
 
-        productService = new ProductService(productList);
-        cartItemCreator = new CartItemCreator(productService);
+        ProductService productService = new ProductService(productList);
+        CartItemCreator cartItemCreator = new CartItemCreator(productService);
 
-        laptopItem = new CartItem(laptop, 1);
-        tvItem = new CartItem(tv, 1);
+        CartItem laptopItem = new CartItem(laptop, 1);
+        CartItem tvItem = new CartItem(tv, 1);
         cart = new Cart(new ArrayList<>());
 
         cartService = new CartService(productService, cartItemCreator, cart);

@@ -14,24 +14,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CartTest {
-    private List<CartItem> cartItemList;
-    Cart cart;
-    Product laptop;
-    Product tv;
-    Product bottle;
-    CartItem laptopItem;
-    CartItem tvItem;
-    CartItem bottleItem;
-    List<Discount> discounts;
+    private  Cart cart;
+    private  CartItem laptopItem;
+    private  CartItem tvItem;
+    private  CartItem bottleItem;
+    private List<Discount> discounts;
 
 
     @BeforeEach
     void setUp() {
-        cartItemList = new ArrayList<>();
+        List<CartItem> cartItemList = new ArrayList<>();
         cart = new Cart(cartItemList);
-        laptop = new Product(1, "Laptop", "Macbook", "Electronic", 10000.00);
-        tv = new Product(2, "TV", "Samsung", "Electronic", 200.00);
-        bottle = new Product (3, "Bottle", "Samsung", "Electronic", 80.00);
+        Product laptop = new Product(1, "Laptop", "Macbook", "Electronic", 10000.00);
+        Product tv = new Product(2, "TV", "Samsung", "Electronic", 200.00);
+        Product bottle = new Product(3, "Bottle", "Samsung", "Electronic", 80.00);
         laptopItem = new CartItem(laptop, 1);
         tvItem = new CartItem(tv, 1);
         bottleItem = new CartItem(bottle, 1);

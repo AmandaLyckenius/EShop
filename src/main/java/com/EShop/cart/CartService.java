@@ -1,13 +1,11 @@
 package com.EShop.cart;
 
-import com.EShop.product.Product;
 import com.EShop.product.ProductService;
 
 public class CartService {
-    ProductService productService;
-    CartItemCreator cartItemCreator;
-    Cart cart;
-    CartItem cartItem;
+    private final ProductService productService;
+    private final CartItemCreator cartItemCreator;
+    private final Cart cart;
 
     public CartService(ProductService productService, CartItemCreator cartItemCreator, Cart cart) {
         this.productService = productService;
@@ -16,8 +14,7 @@ public class CartService {
     }
 
     public boolean addProductToCart_byArticleNumberAndQuantity(int articleNumber, int quantity){
-        cartItem = cartItemCreator.createCartItem(articleNumber, quantity);
-
+        CartItem cartItem = cartItemCreator.createCartItem(articleNumber, quantity);
        if (cartItem != null){
            cart.addToCart(cartItem);
            return true;
@@ -27,14 +24,13 @@ public class CartService {
 
     }
 
-    public boolean removeProductFromCart_byArticleNumber(int articleNumber){
+    public void removeProductFromCart_byArticleNumber(int articleNumber){
         for (CartItem item: cart.getCartItemList()){
             if (item.getProduct().getArticleNumber() == articleNumber){
                 cart.removeFromCart(item);
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     public boolean productExists(int articleNumber) {

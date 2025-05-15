@@ -16,6 +16,10 @@ public class Cart {
         return cartItemList;
     }
 
+    public void setCartItemList(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
+    }
+
     public void addToCart(CartItem cartItem) {
         for (CartItem c : cartItemList) {
             if (c.equals(cartItem)) {
