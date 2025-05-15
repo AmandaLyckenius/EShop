@@ -3,6 +3,7 @@ import com.EShop.cart.Cart;
 import com.EShop.cart.CartItem;
 import com.EShop.cart.CartItemCreator;
 import com.EShop.cart.CartService;
+import com.EShop.discount.Discount;
 import com.EShop.discount.TenPercent;
 import com.EShop.discount.TwentyPercent;
 import com.EShop.product.Product;
@@ -27,8 +28,7 @@ class ConsoleUITest {
     CartItem tvItem;
     Checkout checkout;
     Customer customer;
-    TenPercent tenPercent;
-    TwentyPercent twentyPercent;
+    List <Discount> discounts;
     CartService cartService;
 
     @BeforeEach
@@ -47,14 +47,13 @@ class ConsoleUITest {
         tvItem = new CartItem(tv, 1);
         cart = new Cart(new ArrayList<>());
         customer = new Customer(0);
-        tenPercent = new TenPercent();
-        twentyPercent= new TwentyPercent();
+        discounts = List.of(new TenPercent(), new TwentyPercent());
         cartService = new CartService(productService, cartItemCreator, cart);
 
 
-        checkout = new Checkout(customer,cart,tenPercent,twentyPercent);
+        checkout = new Checkout(customer,cart,discounts);
 
-        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, tenPercent, twentyPercent, customer, productList);
+        consoleUI =new ConsoleUI(cart,cartItemCreator,productService, checkout, cartService, discounts, customer, productList);
     }
 
     @Test

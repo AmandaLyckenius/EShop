@@ -4,8 +4,6 @@ import com.EShop.cart.CartItem;
 import com.EShop.cart.CartItemCreator;
 import com.EShop.cart.CartService;
 import com.EShop.discount.Discount;
-import com.EShop.discount.TenPercent;
-import com.EShop.discount.TwentyPercent;
 import com.EShop.product.Product;
 import com.EShop.product.ProductService;
 
@@ -20,19 +18,17 @@ public class ConsoleUI {
     ProductService productService;
     CartService cartService;
     Checkout checkout;
-    TenPercent tenPercent;
-    TwentyPercent twentyPercent;
+    List <Discount> discounts;
     Customer customer;
     List<Product> allProducts;
 
-    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, TenPercent tenPercent, TwentyPercent twentyPercent, Customer customer, List<Product> allProducts) {
+    public ConsoleUI(Cart cart, CartItemCreator cartItemCreator, ProductService productService, Checkout checkout, CartService cartService, List <Discount> discounts, Customer customer, List<Product> allProducts) {
         this.cart = cart;
         this.cartItemCreator = cartItemCreator;
         this.productService = productService;
         this.checkout = checkout;
         this.cartService = cartService;
-        this.tenPercent = tenPercent;
-        this.twentyPercent = twentyPercent;
+        this.discounts=discounts;
         this.customer = customer;
         this.allProducts=allProducts;
     }
@@ -133,7 +129,7 @@ public class ConsoleUI {
             System.out.println("-----------------------------");
 
             double totalBefore = cart.calculateTotalBeforeDiscount();
-            double totalAfter = cart.calculateTotalAfterDiscount(tenPercent, twentyPercent);
+            double totalAfter = cart.calculateTotalAfterDiscount(discounts);
             double discountAmount = totalBefore - totalAfter;
             System.out.printf("Total before discount: %.2f kr%n", totalBefore);
             System.out.printf("Discount applied: %.2f kr%n", discountAmount);

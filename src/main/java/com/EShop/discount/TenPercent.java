@@ -11,5 +11,10 @@ public class TenPercent implements Discount{
         return total * 0.10;
     }
 
+    @Override
+    public boolean isApplicable(double total) {
+        return (total >=100 && total <=299);
+    }
+
 
 }
